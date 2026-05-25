@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>テーブル追加と削除</title>
+
+  <style>
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      width: 400px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>テキスト入力</h2>
+
+  <!-- テキストボックス -->
+  <input type="text" id="textbox" placeholder="文字を入力してください">
+
+  <!-- 表示ボタン -->
+  <button id="showButton" onclick="showText()">表示</button>
+
+  <!-- 背景色変更ボタン -->
+  <button onclick="changeBackground()">背景色を変更</button>
+
+  <hr>
+
+  <!-- 表示エリア -->
+  <div id="result"></div>
+
+  <!-- テーブル -->
+  <table id="textTable">
+    <tr>
+      <th>No</th>
+      <th>テキスト</th>
+      <th>操作</th>
+    </tr>
+  </table>
+
+  <script>
+    // 背景色配列
+    const colors = ["lightblue", "lightgreen", "lightcoral"];
+
+    let colorIndex = 0;
+
+    // データ番号
+    let number = 0;
+
+    // 表示処理
+    function showText() {
+
+      const text = document.getElementById("textbox").value;
+
+      // 空欄チェック
+      if (text === "") {
+        alert("入力欄が空です。");
+        return;
+      }
+
+      const result = document.getElementById("result");
+
+      // 表示エリア
+      result.innerHTML = text;
+
+      // highlight切替
+      result.classList.toggle("highlight");
+
+      // テーブル取得
+      const table = document.getElementById("textTable");
+
+      // 現在のデータ件数
+      const rowCount = table.rows.length - 1;
+
+      // 3件以上なら最古データ削除
+      if (rowCount >= 3) {
+        table.deleteRow(1);
+      }
+
+      // 行追加
+      const row = table.insertRow();
+
+      // セル追加
+      const cell1 = row.insertCell(0);
+      const cell2 = row.insertCell(1);
+      const cell3 = row.insertCell(2);
+
+      // 番号増加
+      number++;
+
+      // データ設定
+      cell1.innerHTML = number;
+      cell2.innerHTML = text;
+
+      // 削除ボタン
+      cell3.innerHTML =
+        '<button onclick="deleteRow(this)">削除</button>';
+
+      // 入力欄クリア
+      document.getElementById("textbox").value = "";
+    }
+
+    // 行削除
+    function deleteRow(button) {
+
+      // 行取得
+      const row = button.parentNode.parentNode;
+
+      // 削除
+      row.remove();
+    }
+
+    // 背景色変更
+    function changeBackground() {
+
+      document.body.style.backgroundColor = colors[colorIndex];
+
+      colorIndex++;
+
+      // 循環
+      if (colorIndex >= colors.length) {
+        colorIndex = 0;
+      }
+    }
+  </script>
+
+<script src="main.js"></script>
+
+</body>
+</html>
