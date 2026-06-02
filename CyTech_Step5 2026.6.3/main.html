@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>テーブル追加と削除</title>
+
+  <style>
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      width: 400px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>テキスト入力</h2>
+
+  <!-- テキストボックス -->
+  <input type="text" id="textbox" placeholder="文字を入力してください">
+
+  <!-- 表示ボタン -->
+  <button id="showButton" onclick="showText()">表示</button>
+
+  <!-- 背景色変更ボタン -->
+  <button onclick="changeBackground()">背景色を変更</button>
+
+  <hr>
+
+  <!-- 表示エリア -->
+  <div id="result"></div>
+
+  <!--追加回数を表示  -->
+  <p>追加回数:<span id="counter">0</span>回</p> 
+
+  <!-- テーブル -->
+  <table id="textTable">
+    <tr>
+      <th>No</th>
+      <th>テキスト</th>
+      <th>操作</th>
+    </tr>
+  </table>
+
+  
+
+<script src="main.js"></script>
+
+</body>
+</html>
